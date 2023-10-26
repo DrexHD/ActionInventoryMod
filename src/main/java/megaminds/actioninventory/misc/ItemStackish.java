@@ -130,7 +130,7 @@ public class ItemStackish {
 
 	private void nameFrom(NbtCompound display) {
 		if (display.contains(ItemStack.NAME_KEY)) {
-			customName = Optional.of(Text.Serializer.fromJson(display.getString(ItemStack.NAME_KEY)));
+			customName = Optional.ofNullable(Text.Serialization.fromJson(display.getString(ItemStack.NAME_KEY)));
 			display.remove(ItemStack.NAME_KEY);
 		}
 	}
@@ -165,7 +165,7 @@ public class ItemStackish {
 		if (display.contains(ItemStack.LORE_KEY)) {
 			lore = display.getList(ItemStack.LORE_KEY, NbtElement.STRING_TYPE).stream()
 					.map(l->l==null||l==NbtEnd.INSTANCE?"":l.asString())
-					.map(Text.Serializer::fromJson)
+					.map(Text.Serialization::fromJson)
 					.toArray(Text[]::new);
 			display.remove(ItemStack.LORE_KEY);
 		}
@@ -176,7 +176,7 @@ public class ItemStackish {
 		if (display !=null && display.contains(ItemStack.LORE_KEY)) {
 			return display.getList(ItemStack.LORE_KEY, NbtElement.STRING_TYPE).stream()
 					.map(l->l==null||l==NbtEnd.INSTANCE?"":l.asString())
-					.map(Text.Serializer::fromJson)
+					.map(Text.Serialization::fromJson)
 					.toList();
 		}
 		return Collections.emptyList();
@@ -185,7 +185,7 @@ public class ItemStackish {
 	private void addLore(ItemStack s) {
 		NbtList list = Arrays.stream(lore)
 				.map(l->l!=null?l:Text.empty())
-				.map(Text.Serializer::toJson)
+				.map(Text.Serialization::toJsonString)
 				.map(NbtString::of)
 				.collect(NbtList::new, NbtList::add, NbtList::addAll);
 		s.getOrCreateSubNbt(ItemStack.DISPLAY_KEY).put(ItemStack.LORE_KEY, list);
@@ -194,7 +194,7 @@ public class ItemStackish {
 	public static void setLore(ItemStack stack, List<Text> lore) {
 		var list = lore.stream()
 				.map(l->l!=null?l:Text.empty())
-				.map(Text.Serializer::toJson)
+				.map(Text.Serialization::toJsonString)
 				.map(NbtString::of)
 				.collect(NbtList::new, NbtList::add, NbtList::addAll);
 		stack.getOrCreateSubNbt(ItemStack.DISPLAY_KEY).put(ItemStack.LORE_KEY, list);
@@ -356,7 +356,6 @@ public class ItemStackish {
 		@Override
 		public void validate() {
 			Validated.validate(attribute!=null, "Attribute modifiers need attribute to be non-null");
-			Validated.validate(name!=null, "Attribute modifiers need name to be non-null");
 			Validated.validate(operation!=null, "Attribute modifiers need operation to be non-null");
 		}
 
@@ -365,7 +364,8 @@ public class ItemStackish {
 			attribute = Registries.ATTRIBUTE.get(new Identifier(c.getString("AttributeName")));
 			operation = mod.getOperation();
 			value = mod.getValue();
-			name = mod.getName();
+			// TODO: name is private
+			//name = mod.getName();
 			uuid = mod.getId();
 			slot = EquipmentSlot.valueOf(c.getString("Slot"));			
 		}
@@ -428,7 +428,6 @@ public class ItemStackish {
 			if (this == obj) return true;
 			if (!(obj instanceof AttributeValues other)) return false;
 			return Objects.equals(attribute, other.attribute)
-					&& Objects.equals(name, other.name)
 					&& Double.doubleToLongBits(value) == Double.doubleToLongBits(other.value)
 					&& operation == other.operation
 					&& slot == other.slot
@@ -440,7 +439,7 @@ public class ItemStackish {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + ItemStackish.this.hashCode();
-			result = prime * result + Objects.hash(attribute, name, operation, slot, uuid, value);
+			result = prime * result + Objects.hash(attribute, operation, slot, uuid, value);
 			return result;
 		}
 	}
