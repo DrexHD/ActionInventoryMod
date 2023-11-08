@@ -14,6 +14,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import com.mojang.serialization.DynamicOps;
+import com.mojang.serialization.JsonOps;
 import eu.pb4.sgui.api.elements.GuiElementInterface.ClickCallback;
 import megaminds.actioninventory.actions.BasicAction;
 import megaminds.actioninventory.gui.ActionInventoryBuilder;
@@ -88,7 +90,7 @@ public class Serializer {
 				.registerTypeAdapter(ScreenHandlerType.class, registryDelegate(Registries.SCREEN_HANDLER))
 				.registerTypeAdapter(StatusEffect.class, registryDelegate(Registries.STATUS_EFFECT))
 				.registerTypeAdapter(ParticleType.class, registryDelegate(Registries.PARTICLE_TYPE))
-				.registerTypeAdapter(EntityPredicate.class, basic(j -> EntityPredicate.fromJson(j).orElse(null), EntityPredicate::toJson))
+				.registerTypeAdapter(EntityPredicate.class, basic(j -> EntityPredicate.CODEC.parse(JsonOps.INSTANCE, j).result().orElse(null), entityPredicate -> EntityPredicate.CODEC.encodeStart(JsonOps.INSTANCE, entityPredicate).result().get()))
 				.registerTypeAdapterFactory(new WrapperAdapterFactory(new InstancedAdapterWrapper(), new ValidatedAdapterWrapper()))
 				.registerTypeAdapterFactory(new PolyAdapterFactory())
 				.registerTypeAdapterFactory(new OptionalAdapterFactory())
