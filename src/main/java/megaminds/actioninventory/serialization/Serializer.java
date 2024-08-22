@@ -87,7 +87,7 @@ public class Serializer {
 
 				.registerTypeAdapter(ClickCallback.class, delegate(BasicAction.class, ClickCallback.class::cast, BasicAction.class::cast))
 				.registerTypeAdapter(ItemStack.class, delegate(ItemStackish.class, ItemStackish::toStack, ItemStackish::new))
-				.registerTypeAdapter(Identifier.class, delegate(String.class, s-> Identifier.method_60654(s.toLowerCase()), Identifier::toString))
+				.registerTypeAdapter(Identifier.class, delegate(String.class, s-> Identifier.of(s.toLowerCase()), Identifier::toString))
 				.registerTypeAdapter(TriState.class, new TriStateAdapter())
 				.registerTypeAdapter(Item.class, registryDelegate(Registries.ITEM))
 				.registerTypeAdapter(EntityAttribute.class, registryDelegate(Registries.ATTRIBUTE))

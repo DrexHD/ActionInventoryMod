@@ -19,7 +19,7 @@ import net.minecraft.util.Identifier;
 
 @PolyName("Entity")
 public final class EntityOpener extends BasicOpener {
-	private static final Identifier TYPE = Identifier.method_60655(ActionInventoryMod.MOD_ID, "entity");
+	private static final Identifier TYPE = Identifier.of(ActionInventoryMod.MOD_ID, "entity");
 
 	private String entitySelector;	
 	private EntityPredicate entityPredicate;
@@ -57,7 +57,7 @@ public final class EntityOpener extends BasicOpener {
 		var whole = "@s"+entitySelector.strip();
 
 		try {
-			this.selector = new EntitySelectorReader(new StringReader(whole)).read();
+			this.selector = new EntitySelectorReader(new StringReader(whole), true).read();
 		} catch (CommandSyntaxException e) {
 			throw new IllegalArgumentException("Failed to read entity selector for an EntityOpener.", e);
 		}

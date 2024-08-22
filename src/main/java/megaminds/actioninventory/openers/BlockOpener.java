@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 
 @PolyName("Block")
 public final class BlockOpener extends BasicOpener {
-	private static final Identifier TYPE = Identifier.method_60655(ActionInventoryMod.MOD_ID, "block");
+	private static final Identifier TYPE = Identifier.of(ActionInventoryMod.MOD_ID, "block");
 
 	private Block block;
 	private BlockPos position;

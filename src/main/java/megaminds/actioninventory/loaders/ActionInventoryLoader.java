@@ -24,7 +24,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ActionInventoryLoader implements SimpleSynchronousResourceReloadListener {
-	private static final Identifier LOADER_ID = Identifier.method_60655(ActionInventoryMod.MOD_ID, "inventories");
+	private static final Identifier LOADER_ID = Identifier.of(ActionInventoryMod.MOD_ID, "inventories");
 
 	private final Map<Identifier, ActionInventoryBuilder> builders = new HashMap<>();
 

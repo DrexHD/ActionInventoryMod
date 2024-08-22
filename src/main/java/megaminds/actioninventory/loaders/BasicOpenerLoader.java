@@ -17,7 +17,7 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 
 public class BasicOpenerLoader implements SimpleSynchronousResourceReloadListener {
-	private static final Identifier LOADER_ID = Identifier.method_60655(ActionInventoryMod.MOD_ID, "openers");
+	private static final Identifier LOADER_ID = Identifier.of(ActionInventoryMod.MOD_ID, "openers");
 
 	private final Map<Identifier, List<BasicOpener>> openers = new HashMap<>();
 

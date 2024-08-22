@@ -69,7 +69,7 @@ public final class RequirementAction extends GroupAction {
 		var whole = "@s"+entitySelector.strip();
 
 		try {
-			this.selector = new EntitySelectorReader(new StringReader(whole)).read();
+			this.selector = new EntitySelectorReader(new StringReader(whole), true).read();
 		} catch (CommandSyntaxException e) {
 			throw new IllegalArgumentException("Failed to read entity selector for an EntityOpener.", e);
 		}

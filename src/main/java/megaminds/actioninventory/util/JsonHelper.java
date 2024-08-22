@@ -118,11 +118,11 @@ public class JsonHelper {
 	}
 
 	public static Identifier identifier(JsonElement e, Identifier def) {
-		return notNull(e) ? Identifier.method_60654(e.getAsString()) : def;
+		return notNull(e) ? Identifier.of(e.getAsString()) : def;
 	}
 
 	public static Identifier identifier(JsonElement e, Supplier<Identifier> def) {
-		return notNull(e) ? Identifier.method_60654(e.getAsString()) : def.get();
+		return notNull(e) ? Identifier.of(e.getAsString()) : def.get();
 	}
 
 	/**

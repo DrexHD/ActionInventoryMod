@@ -71,14 +71,14 @@ public class ItemStackish {
 			lore = i.get(DataComponentTypes.LORE).lines();
 		}
 		color = Optional.ofNullable(i.get(DataComponentTypes.DYED_COLOR)).map(DyedColorComponent::rgb);
-		EnchantmentHelper.getEnchantments(i).getEnchantmentsMap().forEach(enchantment -> enchantments.put(enchantment.getKey(), enchantment.getIntValue()));
+		EnchantmentHelper.getEnchantments(i).getEnchantmentEntries().forEach(enchantment -> enchantments.put(enchantment.getKey(), enchantment.getIntValue()));
 		if (i.contains(DataComponentTypes.ATTRIBUTE_MODIFIERS)) {
 			attributes = i.get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers().stream()
 				.map(entry -> new AttributeValues(
 					entry.attribute().value(),
 					entry.modifier().operation(),
 					entry.modifier().value(),
-					entry.modifier().uuid(),
+					entry.modifier().id(),
 					entry.slot())
 				).collect(Collectors.toSet());
 		}

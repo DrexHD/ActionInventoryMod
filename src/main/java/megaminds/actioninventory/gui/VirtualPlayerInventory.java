@@ -31,7 +31,7 @@ public class VirtualPlayerInventory extends SimpleGui {
 		}
 		this.setSlot(i, builder.setName(Text.of("Armor")).build());
 		i++;
-		for (int j = PlayerInventory.MAIN_SIZE+PlayerInventory.ARMOR_SLOTS.length-1, k = 0; j>=PlayerInventory.MAIN_SIZE; j--, k++, i++) {
+		for (int j = PlayerInventory.MAIN_SIZE+4-1, k = 0; j>=PlayerInventory.MAIN_SIZE; j--, k++, i++) {
 			this.setSlotRedirect(i, new ArmorSlot(inv, j, k));
 		}
 		this.setSlot(i, builder.setName(Text.of("Offhand")).build());

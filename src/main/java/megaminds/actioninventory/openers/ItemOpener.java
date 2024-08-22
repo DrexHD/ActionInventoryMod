@@ -10,12 +10,12 @@ import megaminds.actioninventory.util.Helper;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.TypedActionResult;
 
 @PolyName("Item")
 public final class ItemOpener extends BasicOpener {
-	private static final Identifier TYPE = Identifier.method_60655(ActionInventoryMod.MOD_ID, "item");
+	private static final Identifier TYPE = Identifier.of(ActionInventoryMod.MOD_ID, "item");
 
 	private ItemStackish stack;
 	private Set<Identifier> tags;
@@ -43,7 +43,7 @@ public final class ItemOpener extends BasicOpener {
 
 	public static void registerCallbacks() {
 		UseItemCallback.EVENT.register((p,w,h)->
-		!w.isClient&&ItemOpener.tryOpen((ServerPlayerEntity)p, p.getStackInHand(h)) ? TypedActionResult.success(ItemStack.EMPTY) : TypedActionResult.pass(ItemStack.EMPTY));		
+		!w.isClient&&ItemOpener.tryOpen((ServerPlayerEntity)p, p.getStackInHand(h)) ? ActionResult.SUCCESS : ActionResult.PASS);
 	}
 
 	@Override
