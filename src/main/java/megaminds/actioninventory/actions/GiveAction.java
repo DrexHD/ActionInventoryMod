@@ -61,7 +61,7 @@ public final class GiveAction extends BasicAction {
 				.build(LootContextTypes.ADVANCEMENT_REWARD);
 
 		Arrays.stream(lootTables)
-		.map(id-> Optional.ofNullable(p.server.getRegistryManager().get(RegistryKeys.LOOT_TABLE).get(id)).orElse(LootTable.EMPTY).generateLoot(lootContext))
+		.map(id-> Optional.ofNullable(p.server.getRegistryManager().getOrThrow(RegistryKeys.LOOT_TABLE).get(id)).orElse(LootTable.EMPTY).generateLoot(lootContext))
 		.<ItemStack>mapMulti(List::forEach)
 		.filter(Objects::nonNull)
 		.map(s->Helper.parseItemStack(s, PlaceholderContext.of(p)))

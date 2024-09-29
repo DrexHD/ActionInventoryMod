@@ -64,7 +64,7 @@ public class MessageHelper {
 	}
 
 	private static Optional<RegistryKey<MessageType>> idToKey(Identifier id, MinecraftServer server) {
-		var reg = server.getRegistryManager().get(RegistryKeys.MESSAGE_TYPE);
+		var reg = server.getRegistryManager().getOrThrow(RegistryKeys.MESSAGE_TYPE);
 		return reg.getKey(reg.get(id));
 	}
 

@@ -2,6 +2,7 @@ package megaminds.actioninventory.actions;
 
 import java.util.Arrays;
 
+import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 
 import com.mojang.brigadier.StringReader;
@@ -57,7 +58,7 @@ public final class RequirementAction extends GroupAction {
 
 	private boolean matchesSelector(Entity e) {
 		try {
-			return selector == null || e.equals(selector.getEntity(e.getCommandSource().withMaxLevel(2)));
+			return selector == null || e.equals(selector.getEntity(e.getCommandSource((ServerWorld) e.getWorld()).withMaxLevel(2)));
 		} catch (CommandSyntaxException e1) {
 			return false;
 		}

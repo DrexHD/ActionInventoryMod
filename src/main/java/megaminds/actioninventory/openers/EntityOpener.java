@@ -14,6 +14,7 @@ import net.minecraft.command.EntitySelectorReader;
 import net.minecraft.entity.Entity;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 
@@ -45,7 +46,7 @@ public final class EntityOpener extends BasicOpener {
 
 	private boolean matches(Entity e) {
 		try {
-			return e.equals(selector.getEntity(e.getCommandSource().withMaxLevel(2)));
+			return e.equals(selector.getEntity(e.getCommandSource((ServerWorld) e.getWorld()).withMaxLevel(2)));
 		} catch (CommandSyntaxException e1) {
 			return false;
 		}
