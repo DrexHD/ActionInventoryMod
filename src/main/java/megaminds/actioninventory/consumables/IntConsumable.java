@@ -37,7 +37,7 @@ public abstract sealed class IntConsumable extends BasicConsumable permits ItemC
 		var requireFullB = getRequireFull().orElse(false);
 		var hasPaid = Helper.getBoolean(storage, COMPLETE);
 
-		var left = amount-storage.getInt(AMOUNT_KEY);
+		var left = amount-storage.getInt(AMOUNT_KEY, 0);
 
 		//the full amount has not been paid and [the full amount is not required or (the full amount is required and can be paid)].
 		if (!hasPaid && (!requireFullB || canConsumeFull(server, player, left))) {

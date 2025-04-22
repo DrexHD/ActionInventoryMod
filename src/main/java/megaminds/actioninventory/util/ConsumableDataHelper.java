@@ -51,7 +51,7 @@ public class ConsumableDataHelper {
 	}
 
 	public static Optional<NbtCompound> getGui(MinecraftServer server, UUID player, String guiName) {
-		return getPlayer(server, player).filter(n->n.contains(guiName)).map(n->n.getCompound(guiName));
+		return getPlayer(server, player).filter(n->n.contains(guiName)).map(n->n.getCompoundOrEmpty(guiName));
 	}
 
 	public static NbtCompound getOrCreateGui(MinecraftServer server, UUID player, String guiName) {
@@ -67,7 +67,7 @@ public class ConsumableDataHelper {
 	}
 
 	public static Optional<NbtCompound> getAction(MinecraftServer server, UUID player, String guiName, String lastAction) {
-		return getGui(server, player, guiName).filter(n->n.contains(lastAction)).map(n->n.getCompound(lastAction));
+		return getGui(server, player, guiName).filter(n->n.contains(lastAction)).map(n->n.getCompoundOrEmpty(lastAction));
 	}
 
 	public static NbtCompound getOrCreateAction(MinecraftServer server, UUID player, String guiName, String lastAction) {
@@ -83,7 +83,7 @@ public class ConsumableDataHelper {
 	}
 
 	public static Optional<NbtCompound> getConsumable(MinecraftServer server, UUID player, String guiName, String lastAction, String consumable) {
-		return getAction(server, player, guiName, lastAction).filter(n->n.contains(consumable)).map(n->n.getCompound(consumable));
+		return getAction(server, player, guiName, lastAction).filter(n->n.contains(consumable)).map(n->n.getCompoundOrEmpty(consumable));
 	}
 
 	public static NbtCompound getOrCreateConsumable(MinecraftServer server, UUID player, String guiName, String lastAction, String consumable) {

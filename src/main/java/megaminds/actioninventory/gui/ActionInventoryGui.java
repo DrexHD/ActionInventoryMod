@@ -47,14 +47,6 @@ public interface ActionInventoryGui extends BetterGuiI {
 		return BetterGuiI.super.onAnyClick(index, type, action);
 	}
 
-	/**@since 3.1*/
-	default void onCraftRequest(Identifier recipe, boolean shift) {
-		var server = getPlayer().getServer();
-		setLastClicked(server.getRecipeManager().get(recipe).map(RecipeEntry::value).map(r -> r.getResult(server.getRegistryManager())).orElse(ItemStack.EMPTY));
-		setLastAction("onCraft");
-		getRecipeAction().onRecipe(recipe, shift, this);
-	}
-
 	/**
 	 * Returns the stack at the current slot.
 	 */

@@ -94,7 +94,7 @@ public class ItemStackish {
 		if (damage!=null) s.setDamage(damage);
         if (customName != null) customName.ifPresent(text -> s.set(DataComponentTypes.CUSTOM_NAME, text));
 		if (lore!=null) s.set(DataComponentTypes.LORE, new LoreComponent(lore));
-		if (color != null) color.ifPresent(rgb -> s.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(rgb, true)));
+		if (color != null) color.ifPresent(rgb -> s.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(rgb)));
 		if (enchantments != null) {
 			ItemEnchantmentsComponent.Builder builder = new ItemEnchantmentsComponent.Builder(ItemEnchantmentsComponent.DEFAULT);
 			enchantments.forEach(builder::add);
@@ -261,7 +261,7 @@ public class ItemStackish {
 			stack.apply(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT, component -> {
 				List<AttributeModifiersComponent.Entry> modifiers = new LinkedList<>(component.modifiers());
 				modifiers.add(new AttributeModifiersComponent.Entry(Registries.ATTRIBUTE.getEntry(attribute), mod, slot));
-				return new AttributeModifiersComponent(modifiers, false);
+				return new AttributeModifiersComponent(modifiers);
 			});
 		}
 

@@ -15,7 +15,7 @@ import net.minecraft.nbt.visitor.StringNbtWriter;
 public class NbtElementAdapter extends TypeAdapter<NbtElement> {
 	@Override
 	public void write(JsonWriter out, NbtElement value) throws IOException {
-		out.value(new StringNbtWriter().apply(value));
+		out.value(value.toString());
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class NbtElementAdapter extends TypeAdapter<NbtElement> {
 		var s = in.nextString();
 		if (s.isEmpty()) return null;
 		try {
-			return new StringNbtReader(new StringReader(s)).parseElement();
+			return StringNbtReader.readCompound(s);
 		} catch (CommandSyntaxException e) {
 			throw new IllegalArgumentException(e);
 		}

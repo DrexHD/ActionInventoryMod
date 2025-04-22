@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import net.minecraft.loot.LootTable;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.registry.RegistryKeys;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +17,6 @@ import megaminds.actioninventory.util.Helper;
 import megaminds.actioninventory.util.annotations.PolyName;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.screen.slot.SlotActionType;
@@ -54,7 +54,7 @@ public final class GiveAction extends BasicAction {
 			if (current!=null) p.getInventory().offerOrDrop(current);
 		}
 
-		var lootContext = new LootContextParameterSet.Builder(p.getServerWorld())
+		var lootContext = new LootWorldContext.Builder(p.getServerWorld())
 				.add(LootContextParameters.THIS_ENTITY, p)
 				.add(LootContextParameters.ORIGIN, p.getPos())
 				.luck(p.getLuck())

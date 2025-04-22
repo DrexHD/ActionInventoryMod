@@ -65,21 +65,21 @@ public class Helper {
 	 * False if compound==null
 	 */
 	public static boolean getBoolean(@Nullable NbtCompound compound, String key) {
-		return compound!=null && compound.getBoolean(key);
+		return compound!=null && compound.getBoolean(key, false);
 	}
 
 	/**
 	 * 0 if compound==null
 	 */
 	public static int getInt(@Nullable NbtCompound compound, String key) {
-		return compound==null ? 0 : compound.getInt(key);
+		return compound==null ? 0 : compound.getInt(key, 0);
 	}
 
 	/**
 	 * 0 if compound==null
 	 */
 	public static long getLong(@Nullable NbtCompound compound, String key) {
-		return compound==null ? 0 : compound.getInt(key);
+		return compound==null ? 0 : compound.getInt(key, 0);
 	}
 
 	/**
