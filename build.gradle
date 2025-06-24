@@ -45,7 +45,7 @@ publishMods {
 
 	github {
 		accessToken = providers.environmentVariable("GITHUB_TOKEN")
-		repository = providers.environmentVariable("GITHUB_REPOSITORY").getOrElse("DrexHD/deathlog")
+		repository = providers.environmentVariable("GITHUB_REPOSITORY").getOrElse("DrexHD/ActionInventoryMod")
 		commitish = providers.environmentVariable("GITHUB_REF_NAME").getOrElse("main")
 	}
 }
