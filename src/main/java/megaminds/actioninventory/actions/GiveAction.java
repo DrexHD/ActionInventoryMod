@@ -54,14 +54,14 @@ public final class GiveAction extends BasicAction {
 			if (current!=null) p.getInventory().offerOrDrop(current);
 		}
 
-		var lootContext = new LootWorldContext.Builder(p.getServerWorld())
+		var lootContext = new LootWorldContext.Builder(p.getWorld())
 				.add(LootContextParameters.THIS_ENTITY, p)
 				.add(LootContextParameters.ORIGIN, p.getPos())
 				.luck(p.getLuck())
 				.build(LootContextTypes.ADVANCEMENT_REWARD);
 
 		Arrays.stream(lootTables)
-		.map(id-> Optional.ofNullable(p.server.getRegistryManager().getOrThrow(RegistryKeys.LOOT_TABLE).get(id)).orElse(LootTable.EMPTY).generateLoot(lootContext))
+		.map(id-> Optional.ofNullable(p.getServer().getRegistryManager().getOrThrow(RegistryKeys.LOOT_TABLE).get(id)).orElse(LootTable.EMPTY).generateLoot(lootContext))
 		.<ItemStack>mapMulti(List::forEach)
 		.filter(Objects::nonNull)
 		.map(s->Helper.parseItemStack(s, PlaceholderContext.of(p)))

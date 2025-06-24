@@ -83,7 +83,7 @@ public class Serializer {
 				.setExclusionStrategies(new ExcludeStrategy())
 
 				.registerTypeHierarchyAdapter(NbtElement.class, new NbtElementAdapter().nullSafe())
-				.registerTypeHierarchyAdapter(Text.class, basic(jsonElement -> Text.Serialization.fromJsonTree(jsonElement, DynamicRegistryManager.EMPTY), mutableText -> TextCodecs.CODEC.encodeStart(DynamicRegistryManager.EMPTY.getOps(JsonOps.INSTANCE), mutableText).getOrThrow()))
+				.registerTypeHierarchyAdapter(Text.class, basic(jsonElement -> TextCodecs.CODEC.decode(JsonOps.INSTANCE, jsonElement).getOrThrow().getFirst(), mutableText -> TextCodecs.CODEC.encodeStart(JsonOps.INSTANCE, mutableText).getOrThrow()))
 
 				.registerTypeAdapter(ClickCallback.class, delegate(BasicAction.class, ClickCallback.class::cast, BasicAction.class::cast))
 				.registerTypeAdapter(ItemStack.class, delegate(ItemStackish.class, ItemStackish::toStack, ItemStackish::new))

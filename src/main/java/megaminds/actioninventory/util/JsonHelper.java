@@ -12,7 +12,11 @@ import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.text.TextCodecs;
+import net.minecraft.text.TextContent;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.gson.JsonArray;
@@ -176,7 +180,7 @@ public class JsonHelper {
 	}
 
 	public static Text text(JsonElement e, Text def) {
-		return notNull(e) ? notNull(Text.Serialization.fromJsonTree(e, DynamicRegistryManager.EMPTY), def) : def;
+		return notNull(e) ? TextCodecs.CODEC.decode(JsonOps.INSTANCE, e).result().map(Pair::getFirst).orElse(def) : def;
 	}
 
 	/**
