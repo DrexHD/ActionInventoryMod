@@ -46,7 +46,7 @@ public final class EntityOpener extends BasicOpener {
 
 	private boolean matches(Entity e) {
 		try {
-			return e.equals(selector.getEntity(e.getCommandSource((ServerWorld) e.getWorld()).withMaxLevel(2)));
+			return e.equals(selector.getEntity(e.getCommandSource((ServerWorld) e.getEntityWorld()).withMaxLevel(2)));
 		} catch (CommandSyntaxException e1) {
 			return false;
 		}
@@ -69,8 +69,8 @@ public final class EntityOpener extends BasicOpener {
 	}
 
 	public static void registerCallbacks() {
-		UseEntityCallback.EVENT.register((p,w,h,e,r) -> !w.isClient&&tryOpen((ServerPlayerEntity)p, e) ? ActionResult.SUCCESS : ActionResult.PASS);
-		AttackEntityCallback.EVENT.register((p,w,h,e,r) -> !w.isClient&&tryOpen((ServerPlayerEntity)p, e) ? ActionResult.SUCCESS : ActionResult.PASS);
+		UseEntityCallback.EVENT.register((p,w,h,e,r) -> !w.isClient()&&tryOpen((ServerPlayerEntity)p, e) ? ActionResult.SUCCESS : ActionResult.PASS);
+		AttackEntityCallback.EVENT.register((p,w,h,e,r) -> !w.isClient()&&tryOpen((ServerPlayerEntity)p, e) ? ActionResult.SUCCESS : ActionResult.PASS);
 	}
 
 	@Override

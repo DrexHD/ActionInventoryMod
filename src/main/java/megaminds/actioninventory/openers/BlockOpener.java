@@ -67,8 +67,8 @@ public final class BlockOpener extends BasicOpener {
 	}
 
 	public static void registerCallbacks() {
-		UseBlockCallback.EVENT.register((p,w,h,r)-> !w.isClient&&BlockOpener.tryOpen((ServerPlayerEntity)p, w.getBlockState(r.getBlockPos()), r.getBlockPos(), w.getBlockEntity(r.getBlockPos())) ? ActionResult.SUCCESS : ActionResult.PASS);
-		AttackBlockCallback.EVENT.register((p,w,h,b,d)-> !w.isClient&&BlockOpener.tryOpen((ServerPlayerEntity)p, w.getBlockState(b), b, w.getBlockEntity(b)) ? ActionResult.SUCCESS : ActionResult.PASS);		
+		UseBlockCallback.EVENT.register((p,w,h,r)-> !w.isClient()&&BlockOpener.tryOpen((ServerPlayerEntity)p, w.getBlockState(r.getBlockPos()), r.getBlockPos(), w.getBlockEntity(r.getBlockPos())) ? ActionResult.SUCCESS : ActionResult.PASS);
+		AttackBlockCallback.EVENT.register((p,w,h,b,d)-> !w.isClient()&&BlockOpener.tryOpen((ServerPlayerEntity)p, w.getBlockState(b), b, w.getBlockEntity(b)) ? ActionResult.SUCCESS : ActionResult.PASS);
 	}
 
 	@Override

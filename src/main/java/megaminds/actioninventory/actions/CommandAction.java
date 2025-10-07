@@ -48,7 +48,7 @@ public final class CommandAction extends BasicAction {
 	public void accept(@NotNull ActionInventoryGui gui) {
 		var player = gui.getPlayer();
 
-		var source = fromServer.orElse(false) ? player.getServer().getCommandSource() : player.getCommandSource();
+		var source = fromServer.orElse(false) ? player.getEntityWorld().getServer().getCommandSource() : player.getCommandSource();
 		if (silent.orElse(false)) source = source.withSilent();
 		if (higherLevel!=null) source = source.withMaxLevel(higherLevel);
 

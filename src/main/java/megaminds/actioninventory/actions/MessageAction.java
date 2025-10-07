@@ -56,7 +56,7 @@ public final class MessageAction extends BasicAction {
 	@Override
 	public void accept(@NotNull ActionInventoryGui gui) {
 		var player = gui.getPlayer();
-		var server = player.getServer();
+		var server = player.getEntityWorld().getServer();
 		if (sender==null) sender = player.getUuid();
 
 		if (receivers==null || receivers.isEmpty()) {

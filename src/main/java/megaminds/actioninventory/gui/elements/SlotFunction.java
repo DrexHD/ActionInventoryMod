@@ -25,7 +25,7 @@ public non-sealed class SlotFunction extends SlotElement implements Validated {
 	}
 
 	public Slot getSlot(ServerPlayerEntity p) {
-		ServerPlayerEntity real = name==null ? p : p.getServer().getPlayerManager().getPlayer(name);
+		ServerPlayerEntity real = name==null ? p : p.getEntityWorld().getServer().getPlayerManager().getPlayer(name);
 		return switch (guiType) {
 		case PLAYER -> new Slot(real.getInventory(), slotIndex, 0, 0);
 		case ENDER_CHEST -> new Slot(real.getEnderChestInventory(), slotIndex, 0, 0);

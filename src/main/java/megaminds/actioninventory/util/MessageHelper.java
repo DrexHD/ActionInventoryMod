@@ -6,8 +6,6 @@ import java.util.UUID;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.mojang.authlib.GameProfile;
-
 import eu.pb4.placeholders.api.PlaceholderContext;
 import eu.pb4.placeholders.api.Placeholders;
 import eu.pb4.placeholders.api.node.TextNode;
@@ -17,9 +15,7 @@ import net.minecraft.network.message.SignedMessage;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.PlayerManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -93,36 +89,8 @@ public class MessageHelper {
 		server.sendMessage(Placeholders.parseText(message, PlaceholderContext.of(server)));
 	}
 
-	/**
-	 * Executes the given command as the server.
-	 */
-	public static void executeCommand(MinecraftServer server, String command) {
-		executeCommand(server.getCommandSource(), command);
-	}
-
-	/**
-	 * Executes the given command as the player.<br>
-	 * Command may fail if the player has incorrect permissions.
-	 */
-	public static void executeCommand(ServerPlayerEntity player, String command) {
-		executeCommand(player.getCommandSource(), command);
-	}
-
 	public static void executeCommand(ServerCommandSource source, String command) {
 		source.getServer().getCommandManager().executeWithPrefix(source, Placeholders.parseText(TextNode.of(command), PlaceholderContext.of(source)).getString());
 	}
 
-	/**
-	 * Executes the given command as the given player.<br>
-	 * If the player was not already an op, they made an op before executing the command and deopped after completing the command.
-	 */
-	public static void executeOppedCommand(ServerPlayerEntity player, String command) {
-		PlayerManager manager = player.getServer().getPlayerManager();
-		GameProfile profile = player.getGameProfile();
-		boolean wasOp = manager.isOperator(profile);
-
-		if (!wasOp) manager.addToOperators(profile);
-		executeCommand(player, command);
-		if (!wasOp) manager.removeFromOperators(profile);
-	}
 }

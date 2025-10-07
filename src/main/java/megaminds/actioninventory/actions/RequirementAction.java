@@ -58,7 +58,7 @@ public final class RequirementAction extends GroupAction {
 
 	private boolean matchesSelector(Entity e) {
 		try {
-			return selector == null || e.equals(selector.getEntity(e.getCommandSource((ServerWorld) e.getWorld()).withMaxLevel(2)));
+			return selector == null || e.equals(selector.getEntity(e.getCommandSource((ServerWorld) e.getEntityWorld()).withMaxLevel(2)));
 		} catch (CommandSyntaxException e1) {
 			return false;
 		}

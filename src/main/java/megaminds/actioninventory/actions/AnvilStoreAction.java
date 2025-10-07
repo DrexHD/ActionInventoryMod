@@ -73,7 +73,7 @@ public final class AnvilStoreAction extends BasicAction {
 			return;
 		}
 				
-		var commandStorage = player.getServer().getDataCommandStorage();
+		var commandStorage = player.getEntityWorld().getServer().getDataCommandStorage();
 		var nbtCompound = commandStorage.get(id);
 		try {
 			nbtPath.put(nbtCompound, NbtString.of(a.getInput()));

@@ -53,7 +53,7 @@ public final class ConsumeAction extends GroupAction {
 
 		var p = gui.getPlayer();
 		var player = p.getUuid();
-		var server = p.getServer();
+		var server = p.getEntityWorld().getServer();
 		var guiName = gui.getId().toString();
 		var lastAction = gui.getLastAction();
 		var singlePayB = singlePay.orElse(false);

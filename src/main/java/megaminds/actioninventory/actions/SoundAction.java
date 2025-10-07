@@ -53,7 +53,7 @@ public final class SoundAction extends BasicAction {
 	@Override
 	public void accept(@NotNull ActionInventoryGui gui) {
 		var player = gui.getPlayer();
-		var pos = Objects.requireNonNullElseGet(position, player::getPos);
+		var pos = Objects.requireNonNullElseGet(position, player::getEntityPos);
 		player.networkHandler.sendPacket(new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(sound), category, pos.x, pos.y, pos.z, volume, pitch, ActionInventoryMod.RANDOM.nextLong()));
 	}
 

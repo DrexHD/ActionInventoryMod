@@ -56,12 +56,12 @@ public class ActionInventoryLoader implements SimpleSynchronousResourceReloadLis
 	}
 
 	public void openEnderChest(ServerPlayerEntity openFor, UUID toOpen) {
-		var p = openFor.getServer().getPlayerManager().getPlayer(toOpen);
+		var p = openFor.getEntityWorld().getServer().getPlayerManager().getPlayer(toOpen);
 		openFor.openHandledScreen(new SimpleNamedScreenHandlerFactory((syncId, inventory, player) -> GenericContainerScreenHandler.createGeneric9x3(syncId, inventory, p.getEnderChestInventory()), p.getName().copy().append(Text.of("'s ")).append(Text.translatable("container.enderchest"))));
 	}
 
 	public void openInventory(ServerPlayerEntity openFor, UUID toOpen) {
-		var p = openFor.getServer().getPlayerManager().getPlayer(toOpen);
+		var p = openFor.getEntityWorld().getServer().getPlayerManager().getPlayer(toOpen);
 		new VirtualPlayerInventory(openFor, false, p).open();
 	}
 

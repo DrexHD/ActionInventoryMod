@@ -43,7 +43,7 @@ public final class ItemOpener extends BasicOpener {
 
 	public static void registerCallbacks() {
 		UseItemCallback.EVENT.register((p,w,h)->
-		!w.isClient&&ItemOpener.tryOpen((ServerPlayerEntity)p, p.getStackInHand(h)) ? ActionResult.SUCCESS : ActionResult.PASS);
+		!w.isClient()&&ItemOpener.tryOpen((ServerPlayerEntity)p, p.getStackInHand(h)) ? ActionResult.SUCCESS : ActionResult.PASS);
 	}
 
 	@Override
